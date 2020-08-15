@@ -27,12 +27,12 @@ else:
 
 num = input('Четные / Нечетные: ')
 i = 0
-if num == '+':
+if num == 'Четные':
     while i < 21:
         if i % 2 == 0:
             print(i, end=' ')
         i += 1
-elif num == '-':
+elif num == 'Нечетные':
     while i < 21:
         if i % 2 == 1:
             print(i, end=' ')
