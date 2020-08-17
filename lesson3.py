@@ -168,3 +168,9 @@ c = 'Step'
 # print(myset.issuperset([1, 2, 3]))
 # print(myset.issuperset([1, 2, 3, 4]))
 
+d = dict.fromkeys(['a', 'b'])
+print(d)
+d['a'] = 'aa'
+print(d)
+d.update({'c': ['1'], 'b': 1})
+print(d)
