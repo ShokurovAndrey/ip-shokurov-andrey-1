@@ -1,175 +1,116 @@
-##### Передача аргументов по ссылке / значению
+""" __author__ = 'Шокуров Андрей Александрович' """
+# Easy
 
-# n1 = 2
-# n2 = n1
-# n1 = 4
-# print('n1 - ', n1, 'n2 - ', n2)
-# неизменяемые объекты int float complex str tupl - Immutable object
-# изменяемые объекты set list dict - Mutable object
-# print(f'n1={n1} n2={n2}')
-#
-# sp1 = [1, 2, 3]
-# sp2 = sp1
-# sp2.append(4)
-# print(f'sp1 = {sp1} sp2 = {sp2}')
-# print(f'id(sp1) = {id(sp1)} id(sp2) = {id(sp2)}')
+# Задание-1:
+# Дан список, заполненный произвольными целыми числами.
+# Получить новый список, элементы которого будут
+# квадратами элементов исходного списка
+# [1, 2, 4, 0] --> [1, 4, 16, 0]
 
+random_List = [1, 3, 5, 10, 0]
+random_New = []
+for el in random_List:
+    random_New.append(el*el)
+print(f'Исходный random_List = {random_List}, измененный random_New = {random_New}') # var 1
 
-# def modify(lst):
-#     lst.append('new')
-#     return lst
-#
-#
-# my_list = [1, 2, 3]
-# # mod_list = modify(my_list[:])
-# mod_list = modify(list(my_list))
-# #функция вернула измененный список
-# print('mod_list = ', mod_list, id(mod_list))
-# # но исходный список тоже изменился, подобное неявное поведение нежелательно для функции
-# print('mod_list = ', my_list, id(my_list))
+random_New2 = [i**2 for i in random_List]
+print(f'Исходный random_List = {random_List}, измененный random_New2 = {random_New2}') # var 2
 
-# my_list = [1, -2, -4, 0, 5, -2]
-# # удаляем все отрицательные элементы
-# for el in my_list:
-#     if el < 0:
-#         my_list.remove(el)
-# # не тот результат который ожидали
-# print('1) my_list after remove ---> ', my_list)
-#
-# my_list = [1, -2, -4, 0, 5, -2]
-# # итерируем по копии, а удаляем из оригинала
-# for el in my_list[:]: # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#     if el < 0:
-#         my_list.remove(el)
-# # отлично
-# print('1) my_list after remove ---> ', my_list)
+# Задание-2:
+# Даны два списка фруктов.
+# Получить список фруктов, присутствующих в обоих исходных списках.
 
-# если нужно сделать полную копию со всеми вложенными изменяемыми объектами, используем copy
-# import copy
-# sp = [[2, 3], [4, 6, [7, 8]]]
-# sp_copy = copy.deepcopy(sp)
-# sp[0].append(10)
-# print('sp_copy = ', sp_copy)
-# print('sp - ', sp)
-# #
-# sp_copy = sp[:] # запись поверхностной копии sp
-# print('sp = ', sp)
-#
-############################# матрицы \ список со списком \\\\ изменяемый объект
+a = ['банан', 'киви', 'апельсин', 'манго']
+b = ['кокос', 'киви', 'апельсин', 'маракуя']
+c = []
+for x, y in zip(a, b):
+    if x == y:
+        c.append(x)
+print(c)
 
-# matrix = [[1, 2, 3],
-#           [4, 5, 6],
-#           [7, 8, 9]]
-# print('matrix = ', matrix)
-#
-# # делаем просто и красиво
-# print('*************FOR************')
-# for i, line in enumerate(matrix):
-#     for j, el in enumerate(line):
-#         print('matrix[{}][{}] = {}'.format(i, j, matrix[i][j]))
-# ## Пример транспортирования (поворота) матрицы
-# print('rotate_matrix = ', list(map(list,zip(*matrix))))
-
-################ принцип работы операторов and or
-
-# people = {}
-# if people.get('name'):
-#     name = people['name']
-# else:
-#     name = 'Безымянный'
-# print(name)
-# name = people.get('name') or 'Unknow'
-#
-# # тоже самое с помощью or
-#
-# print(people.get('name') or 'безымянный')
-# # несмотря на несуществ. переменную u_var, код все равно выполняется, т.к. оператор or не проверяет операнд справа
-# print(5 or u_var) # какая то дичь
+# Задание-3:
+# Дан список, заполненный произвольными числами.
+# Получить список из элементов исходного, удовлетворяющих следующим условиям:
+# + Элемент кратен 3
+# + Элемент положительный
+# + Элемент не кратен 4
 
 
-############################ тернанрый оператор  -
-# - истина if условие else иначе (d.get('name') if d.get('name') else 'безымянный')
-#
-# d = {'name': 'Вася'}
-#
-# if d.get('name'):
-#     name = d['name']
-# else:
-#     name = 'безымянный'
-# print(name)
-# # или с поьощью if else
-# print(d.get('name') if d.get('name') else 'безымянный')
+import random
+lst_g = [random.randint(-5, 10) for i in range(10)]
+print('Исходный список = ', lst_g)
+lst_x = [i for i in lst_g if i % 3 == 0 and i > 0 and i % 4 != 0]
+print(f'Выполняющий условия - {lst_x}')
 
-################# оператор is - оператор - является
+# Normal
 
-# c = [1, 2]
-# d = c
-# e = [1, 2]
-# print(c is d)
-# print(c is e)
+# Задание-1:
+# Вывести символы в нижнем регистре, которые находятся вокруг
+# 1 или более символов в верхнем регистре.
+# Т.е. из строки "mtMmEZUOmcq" нужно получить ['mt', 'm', 'mcq']
+# Решить задачу двумя способами: с помощью re и без.
 
-#####################################  генераторы списков и словарей
-
-# import random
-# # Заполняем список произвольными целыми числами
-# lst = []
-# for _ in range(10): # на месте _ может быть, что угодно i и так далее, не заостряем внимания
-#     lst.append(random.randint(-10, 10))
-# print('lst = ', lst)
-#
-# #Тоже самое, но с помощью генератора списка
-# #Компактнее код и выполняется быстрее
-# lst_g = [random.randint(-10, 10) for _ in range(10)]
-# print('lst_g = ', lst_g)
-#
-# # Отбрасываем все отрицательные элементы списка
-# only_positive = [el for el in lst_g if el >= 0]
-# print('only_positive = ', only_positive)
-
-########## генераторы словари / словарь изменяемый
-
-# keys = 'abcdefg'
-# values = range(10)
-# dict_g = {key: value for key, value in zip(keys, values)}
-# #подробнее о зип в след. примере
-# print('dict_g = ', dict_g)
-# # более прсотой пример создания словаря
-# dict2_g = {el: el+4 for el in [1, 4, 6, 8]}
-# print('dict2_g = ', dict2_g)
-
-########################################## регулярные выражения
-#
-# print('hello \t world') # tab
-# print(r'Hello \t world') # видим все
-
-# RE.MATCH
 import re
-# string = 'This is a simple test message for test'
-# string2 = 'test'
-# pattern1 = 'test$'
-# pattern2 = '^test'
-# pattern3 = '^test$'
-# print(re.search(pattern1, string) is None)  # строка заканчивается на 'test'
-# print(re.match(pattern2, string) is None)  # строка не заканчивается на 'test'
-# print(re.match(pattern3, string) is None)  # строка не является строкой 'test'
-# print(re.match(pattern3, string2) is None)  # строка является строкой 'test'
-#
-# found = re.findall(r'test', string)
-# print(found)
+line = 'mtMmEZUOmcqWiryMQhhTxqKdSTKCYEJlEZCsGAMkgAYEOmHBSQsSUHKvSfbmxULaysmNO'\
+       'GIPHpEMujalpPLNzRWXfwHQqwksrFeipEUlTLeclMwAoktKlfUBJHPsnawvjPhfgewVzK'\
+       'TUfSYtBydXaVIpxWjNKgXANvIoumesCSSvjEGRJosUfuhRRDUuTQwLlJJJDdkVjfSAHqn'\
+       'LxooisBDWuxIhyjJaXDYwdoVPnsllMngNlmkpYOlqXEFIxPqqqgAWdJsOvqppOfyIVjXa'\
+       'pzGOrfinzzsNMtBIOclwbfRzytmDgEFUzxvZGkdOaQYLVBfsGSAfJMchgBWAsGnBnWete'\
+       'kUTVuPluKRMQsdelzBgLzuwiimqkFKpyQRzOUyHkXRkdyIEBvTjdByCfkVIAQaAbfCvzQ'\
+       'WrMMsYpLtdqRltXPqcSMXJIvlBzKoQnSwPFkapxGqnZCVFfKRLUIGBLOwhchWCdJbRuXb'\
+       'JrwTRNyAxDctszKjSnndaFkcBZmJZWjUeYMdevHhBJMBSShDqbjAuDGTTrSXZywYkmjCC'\
+       'EUZShGofaFpuespaZWLFNIsOqsIRLexWqTXsOaScgnsUKsJxiihwsCdBViEQBHQaOnLfB'\
+       'tQQShTYHFqrvpVFiiEFMcIFTrTkIBpGUflwTvAzMUtmSQQZGHlmQKJndiAXbIzVkGSeuT'\
+       'SkyjIGsiWLALHUCsnQtiOtrbQOQunurZgHFiZjWtZCEXZCnZjLeMiFlxnPkqfJFbCfKCu'\
+       'UJmGYJZPpRBFNLkqigxFkrRAppYRXeSCBxbGvqHmlsSZMWSVQyzenWoGxyGPvbnhWHuXB'\
+       'qHFjvihuNGEEFsfnMXTfptvIOlhKhyYwxLnqOsBdGvnuyEZIheApQGOXWeXoLWiDQNJFa'\
+       'XiUWgsKQrDOeZoNlZNRvHnLgCmysUeKnVJXPFIzvdDyleXylnKBfLCjLHntltignbQoiQ'\
+       'zTYwZAiRwycdlHfyHNGmkNqSwXUrxGc'
+result = re.findall(r'[a-z]+', line)
+print(result)
 
-# REGEXP
-# найти все цифры в тексте
-# pattern = '[0-9]+k'
-# string = 'if 300 spartans were so brave, so 500 spartans`' \
-#     'could destroy more than 10k warriors of Darius, but 15k and even 20k'
-# print(re.findall(pattern, string))
-# # найти все диапазоны
-# pattern2 = '[0-9]+ *-*[0-9]+'
-# string2 = ' 10 adajksh 15- 10 oiyqhweq (4-9C) -5'
-# print(re.findall(pattern2, string2))
-#
-# # извлечем из html-кода только теги
-# html = '<p style="margin-left:10px;"text'\
-#     '<b class="super-bold">bold text</b>.</p>'
-# pattern = '<[^>]+>'
-# print(re.findall(pattern, html))
+# Задание-2:
+# Вывести символы в верхнем регистре, слева от которых находятся
+# два символа в нижнем регистре, а справа - два символа в верхнем регистре.
+# Т.е. из строки
+# "GAMkgAYEOmHBSQsSUHKvSfbmxULaysmNOGIPHpEMujalpPLNzRWXfwHQqwksrFeipEUlTLec"
+# нужно получить список строк: ['AY', 'NOGI', 'P']
+# Решить задачу двумя способами: с помощью re и без.
+
+line_2 = 'mtMmEZUOmcqWiryMQhhTxqKdSTKCYEJlEZCsGAMkgAYEOmHBSQsSUHKvSfbmxULaysm'\
+       'NOGIPHpEMujalpPLNzRWXfwHQqwksrFeipEUlTLeclMwAoktKlfUBJHPsnawvjPhfgewV'\
+       'fzKTUfSYtBydXaVIpxWjNKgXANvIoumesCSSvjEGRJosUfuhRRDUuTQwLlJJJDdkVjfSA'\
+       'HqnLxooisBDWuxIhyjJaXDYwdoVPnsllMngNlmkpYOlqXEFIxPqqqgAWdJsOvqppOfyIV'\
+       'jXapzGOrfinzzsNMtBIOclwbfRzytmDgEFUzxvZGkdOaQYLVBfsGSAfJMchgBWAsGnBnW'\
+       'etekUTVuPluKRMQsdelzBgLzuwiimqkFKpyQRzOUyHkXRkdyIEBvTjdByCfkVIAQaAbfC'\
+       'vzQWrMMsYpLtdqRltXPqcSMXJIvlBzKoQnSwPFkapxGqnZCVFfKRLUIGBLOwhchWCdJbR'\
+       'uXbJrwTRNyAxDctszKjSnndaFkcBZmJZWjUeYMdevHhBJMBSShDqbjAuDGTTrSXZywYkm'\
+       'jCCEUZShGofaFpuespaZWLFNIsOqsIRLexWqTXsOaScgnsUKsJxiihwsCdBViEQBHQaOn'\
+       'LfBtQQShTYHFqrvpVFiiEFMcIFTrTkIBpGUflwTvAzMUtmSQQZGHlmQKJndiAXbIzVkGS'\
+       'euTSkyjIGsiWLALHUCsnQtiOtrbQOQunurZgHFiZjWtZCEXZCnZjLeMiFlxnPkqfJFbCf'\
+       'KCuUJmGYJZPpRBFNLkqigxFkrRAppYRXeSCBxbGvqHmlsSZMWSVQyzenWoGxyGPvbnhWH'\
+       'uXBqHFjvihuNGEEFsfnMXTfptvIOlhKhyYwxLnqOsBdGvnuyEZIheApQGOXWeXoLWiDQN'\
+       'JFaXiUWgsKQrDOeZoNlZNRvHnLgCmysUeKnVJXPFIzvdDyleXylnKBfLCjLHntltignbQ'\
+       'oiQzTYwZAiRwycdlHfyHNGmkNqSwXUrxGC'
+
+result1 = re.findall(r'[a-z]{2}([A-Z]+)[A-Z]{2}', line_2)
+print(result1)
+
+                                   # Hard
+
+# Задание-1:
+# Матрицы в питоне реализуются в виде вложенных списков:
+# Пример. Дано:
+matrix = [[1, 0, 8],
+          [3, 4, 1],
+          [0, 4, 2]]
+
+# Выполнить поворот (транспонирование) матрицы
+# Пример. Результат:
+# matrix_rotate = [[1, 3, 0],
+#                  [0, 4, 4],
+#                  [8, 1, 2]]
+
+# Суть сложности hard: Решите задачу в одну строку
+
+print(matrix.reverse(), matrix)  # Я попытался :)
