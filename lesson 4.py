@@ -14,17 +14,17 @@ km = float(input('Введите км, для конвертирования в 
 
 (convert(km))
 
+
 # Задание-2:
 # Напишите функцию, округляющую полученное произвольное десятичное число
 # до кол-ва знаков (кол-во знаков передается вторым аргументом).
 # Округление должно происходить по математическим правилам (0.6 --> 1, 0.4 --> 0).
 # Для решения задачи не используйте встроенные функции и функции из модуля math.
 
-def my_round(number, ndigits):
-    num_string = str(number)
-    if '.' not in num_string:
-        return num_string
-    return num_string[:num_string.find('.') + ndigits + 1]
+def my_round(num, nd):
+    n = num * (10 ** nd) + 0.41
+    n = n // 1
+    return n / (10 ** nd)
 
 
 print(my_round(2.1234567, 5))
@@ -36,14 +36,45 @@ print(my_round(2.9999967, 5))
 # Дан шестизначный номер билета. Определить, является ли билет счастливым.
 # Решение реализовать в виде функции.
 # Билет считается счастливым, если сумма его первых и последних цифр равны.
-# !!!P.S.: функция не должна НИЧЕГО print'ить, должна возвращать либо True,
+# !!!P.S.: функция не должна НИЧЕГО print's, должна возвращать либо True,
 # ибо False (если счастливый и несчастливый соответственно)
 
-def lucky_ticket(ticket_number):
-    ticket_number = lambda x: (True if sum(x[0] + x[1]) == sum(x[-1] + x[-2]) else False)
+def lucky_ticket(ticket):
+    s = str(ticket)
+    count = len(s)
+    center = count // 2
 
+    first_sum = 0
+    for i in range(0, center):
+        first_sum += int(s[i])
+
+    second_sum = 0
+    for i in range(center, count):
+        second_sum += int(s[i])
+
+    return first_sum == second_sum
 
 
 print(lucky_ticket(123006))
 print(lucky_ticket(12321))
 print(lucky_ticket(436751))
+
+
+# Normal
+
+# Задание-1:
+# Напишите функцию, возвращающую ряд Фибоначчи с n-элемента до m-элемента.
+# Первыми элементами ряда считать цифры 1 1
+
+def fibonacci(n, m):
+    x = int(input('Введите кол-во значений: '))
+    print(n, m, end=' ')
+    for i in range(3, x + 1):
+        print(n + m, end=' ')
+        b = n
+        n = m
+        m = b + n
+    print()
+
+
+fibonacci(1, 2)
